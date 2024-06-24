@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name = "viewport" content = "width=device-width, initial-scale = 1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="ie-edge"/>
+		<link rel="icon" type="image/jpg" href="{{ url_for('static', filename='img/icon-title-pergunta.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+		<title> Perguntas </title>
+		<script src="https://unpkg.com/feather-icons"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="lateral-menu">
+				<img src="{{ url_for('static', filename='assets/ufc-logo-universidade.png')}}" width="150" height="100">
+
+				<!-- <img src="assets/bb8.png" width="200" height="100"> -->
+				<div class="settings">
+					<p> Seja bem-vindo, {{nome}}! </p>
+				</div>
+				
+				<div class="settings">
+					<i data-feather="settings"></i>
+					<p> PPGEEC </p>
+				</div>
+			</div>
+			<div class="content">
+				<div class="cards-header">
+					<div class="card card-small">
+						<div class="card-content">
+							<div class="card-info">
+								<p> Ultrassônico </p>
+								<h2 id="personagens">{{ultrassonico}}</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="card card-large">
+						<div class="card-container">
+							<div class="card-content">
+								<div class="card-info">
+									<p> Botão verde </p>
+									<h2 id="luas">
+										{% if bt_vermelho == 1 %}
+											On
+										{% else %}
+											Off
+										{% endif %}
+									</h2>
+								</div>
+							</div>
+							<div class="card-content">
+								<div class="card-info">
+									<p> Botão vermelho </p>
+									<h2 id="planetas">
+										{% if bt_vermelho == 1 %}
+											On
+										{% else %}
+											Off
+										{% endif %}
+									</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card card-small">
+						<div class="card-content">
+							<div class="card-info">
+								<p> Temperatura </p>
+								<h2 id="naves">{{temperatura}}</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-extra">
+					<div class="formulario">
+						<form action="/cadastro" method="POST">
+							<p>
+								<label for="lb_pergunta">Pergunta:</label>
+								<input type="text" id="pergunta" name="pergunta" placeholder="Digite sua pergunta" required>
+							</p>
+							<br>
+							<p>
+								<label for="lb_pergunta">Selecione a resposta da pergunta:</label>
+								<select name="resposta" id="resposta">
+									<option value="sim">Sim</option>
+									<option value="nao">Não</option>
+								</select>
+							</p>
+							<center><button>Perguntar</button></center>
+						</form>
+					</div>
+
+					<div class="questoes">
+						<p> Perguntas cadastradas </p>
+						<table class="tabela">
+							<thead>
+								<th scope="col">Pergunta</th>
+								<th scope="col">Resposta</th>
+								<th scope="col">Sentimento</th>
+							</thead>
+							<tbody>
+								{% for value in perguntas_cad %}
+									<tr class="linha">
+										<td> {{value[0]}} </td>
+										<td> {{value[1]}} </td>
+										<td> {{value[1]}} </td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			feather.replace();
+		</script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</body>
+</html>
