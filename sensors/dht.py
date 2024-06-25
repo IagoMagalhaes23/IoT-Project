@@ -19,4 +19,4 @@ def getTemperatura():
     else:
         print("Falha ao ler do sensor.")
 
-    return humidity, temperature
+    return temperature

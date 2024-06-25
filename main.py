@@ -2,7 +2,7 @@ import time
 from flask import Flask, render_template, request
 
 from functions import crud, robot
-# from sensors import buttons, dht, rgb, ultrassonic
+from sensors import buttons, rgb, ultrassonic
 
 app = Flask(__name__)
 
@@ -18,7 +18,14 @@ def auth():
     nome =  request.form.get('nome', False)
     idade = request.form.get('idade', 0)
     turma = [int(idade), nome]
+
+    frase = 'Olá, ' + nome
+    robot.fala(frase)
+
+    sensores = [ultrassonic.distancia(), 1, 1, 40]
     crud.insert_bd('aluno', turma)
+    crud.insert_bd('sensores', dados)
+
     perguntas_cad = crud.read_bd('perguntas')
     aluno = crud.read_bd('aluno')
     dados = crud.read_bd('sensores')
@@ -33,6 +40,7 @@ def cadastro():
     if(pergunta is None):
         print('erro')
     else:
+        robot.fala(pergunta)
         crud.insert_bd('perguntas', questoes)
         pergunta = ''
     
