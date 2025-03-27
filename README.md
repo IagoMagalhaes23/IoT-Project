@@ -1,0 +1,1 @@
+Artigo: https://doi.org/10.1109/SBR/WRE63066.2024.10837805
